@@ -85,8 +85,34 @@ fn output_decimal(input: usize) {
 }
 
 fn output_binary(input: usize) {
-    // let binary_str = String::from(format("{:b}", input));
-    println!("Binary output of: \n\n\t{:b}\n", input);
+    // Take the string input and format it in binary
+    let str_input = String::from(format!("{:b}", input));
+    // initialize a new string to hold the ending value
+    let mut formatted_str = String::new();
+    // create a vector of chars
+    let mut v: Vec<char> = str_input.chars().collect();
+
+    // reverse the vector
+    v.reverse();
+
+    // Iterate over the whole vector (adding into the length the number of spaces to be inserted)
+    // And insert a space every fourth digit (or mod 5 index)
+    for i in 0..(v.len() + (v.len()/4)) {
+        if (i+1)%5 == 0 {
+            v.insert(i  , ' ');        
+        }
+    }
+
+    // reverse the vector to put it the correct direction
+    v.reverse();
+
+    // spit the vector into a string
+    for c in v {
+        formatted_str.push(c);
+    }
+    
+    // Print out the answer
+    println!("Binary output of:\n\n\t{}\n", formatted_str.trim());
 }
 
 fn output_hex(input: usize) {
